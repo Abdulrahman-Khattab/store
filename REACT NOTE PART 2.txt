@@ -1,0 +1,708 @@
+# Props types part 2 
+
+# Now to fix the problem of the prop type we need to import PropsTypes from 'PropsTypes' 
+# Which is react library 
+# Now we gonna access the prop types of the function 
+# We make (image,name , price) is required for each product  
+# Now after that we gonna set some kind of default value so the products will not glitch if we got no value there 
+# Now  the syntax is : 
+# product.propTypes = {}
+# In this object we gonna write each value is required and it's type 
+# example : price:PropTypes.number.isRequired
+# to set default value 
+# product.defaultProps = {
+ name:"sereen"
+ price:50,
+ image: image
+}
+# There is problem with image since it's object and url and the way to fix that we will learn in next lecture
+
+# Note: propsTypes is something we call with the function 
+# Note: PropsTypes is something we call from other library of react 
+# Note: product.defaultProps is the right syntax of defaultProps
+
+# Prop types Short Circuit 
+# Now we know how to set default value 
+# There is another and better approach to those kinds of problem
+# For example using the short circuit operator 
+# Now we know that let's make a fast review 
+# Value && secondValue 
+# If both true the secondValue value will be applied
+# If one of them is false the first value gonna be applied
+# value || secondValue 
+# If both true first value gonna be applied 
+# Any of them is false second value gonna be applied
+# Now let's apply that on our project 
+# We gonna make varible and this varible gonna compare between image && image.url 
+# by doing that we assure we get either (undefined or the url)
+# We can't do that in the image element because that would cause error in react 
+# Now apply that on image element with || with default image 
+# And we apply other on price and name and we are good !
+
+# React router : 
+# Now everything we worked was on single page 
+# But what if we wanted multipile page 
+# Not just tag for other page that's gonna make us go to other page no .. 
+# We mean we are still in the page but the info will be changed 
+# This is the main principle of SPA (single page Application) 
+# We are not going to a server and fetch data 
+# We still working on Client-side  no server is included 
+# React router not offically part of react but it's very popular package
+# To install it we write 
+# npm install react-router-dom 
+# And if you to install specific version write : 
+# npm install "react-router-dom" : "^5.2.0" 
+
+#React router part 2 
+
+# Now we  import the setup folder (whole folder in our app js)
+# And we did that for purpose because we are going to use react router so we gonna router over those pages 
+# Our main page gonna be index.js when the work will be on it 
+# Since we gonna use route so it's very logical to import react router right ? 
+# import {BrowserRouter as Route , Router , Switch  } from "react-router-dom"; 
+# Now we have main items for router WAR HAHAHAHA 
+# Okay we gonna import all page we gonna use to Route 
+# We gonna wrap our whole application with Router or since we use only for this section we gonna wrap whole section with Router 
+# Each item we gonna Route to gonna be wrap it with Route 
+# Now we gonna use special path to each Router 
+# So we add the path property for Each Route and gonna write the right route for it 
+# This will cause little problem because react-router-dom by default gonna take each item have similarity path  of our router  
+# To avoid the problem we just add property of exact to each route and all will be very good 
+# WE can add exact just 1 time and all will work but that will not be the case when we work on nested This will not the case because on nested we gonna have alot of page to work on and it will be very good to have exact at each page so we don't get any possible bug from routing
+# Note: We should import the whole directory and not specific file or the things will not work 
+
+# React Router part3 Switch method 
+
+
+# Now we have our hands on basic of router let's talk little bit more about it 
+# So what if we navigate to the page that we don't have 
+# Ofc it will show blank page 
+# So we want in this case to show error page 
+# So what we gonna do is make router to error page that's always match  
+# to make it always match the path will be "*" 
+# Okay now we navigate to error page just nice 
+# Now other problem occurred  
+# That's we show both error page and other page 
+# That's because error page always match and this not good at all 
+# To solve this problem we gonna use (Switch component)
+# The work of Switch component is to show only the first match 
+# And this will solve our problem 
+# After the router we wrap our code with Switch and that's it 
+
+# React router part 4 
+
+# Now we want to go to other page through nav bar to provide better user EXP 
+# The way to do that is to create navBar and put it in Router (outSide the switch)
+# Note: Switch only contain the page we will navigate back and forth to  
+# To create navBar links we need to import Links component from react-router-dom
+# Not using <a> element and HTML things 
+# Now we need to specific property (to) which will point to the page we will go to  
+# We can use btn too inside the as you like 
+# And that's how you make navBar using SPA technology 
+
+
+# React router part 5 
+
+# Now we want to create single person page 
+# And everyTime we click on learn more we gonna navigate to that single page that have person info
+# There is multipile way to do that but we will go with some simple way and effective 
+# First of all we need to create single person page with special path 
+# The way to do that is by making Route 
+# And path will be "/:write something here" before the (/) we can make our own special path if we want and write anything depend on out Application for example we can make person/:id
+# Now after that we need to know the page will navigate to specific children {<Person/>}
+# So we make the person component our placeHolder for the children any child will go inside it 
+# Now we go to people displaying and add the link of learn more 
+# This link gonna pass the same path as before and we add the id dynmically 
+# This will not effect the page we will navigate to because we make the person component is the default page 
+# Now we want to grab that value of id 
+# The way to do that is using usePram of react-router-dom 
+# we need to invoke it  and it will give us back object this object contain name(the name of path after /:) and value that we pass  
+# I know it's little bit clunky but try deal with it  
+# Now we got value as string but sometime we need value as number 
+# We just parsInt(id) or toString(id) and everything is fine 
+# Now after that we gonna UseEffect and inside we go to loop through our data and check it with id 
+# If we find that id we gonna display that person  
+# And we gonna use it's property by make useState and each State will gonna have one of his values 
+# And that's it
+# Note: /person/id is the right path
+# Note: Be sure to get the Id right 
+
+
+# Memo function 
+
+# Memo function diffrent from react use memo   (first one is function second one is hook )
+# Memo work is simple 
+# Let's imagine we have list of 11 items and we counter 
+# This counter is set by useState 
+# and we put somekind of hello world in each single product so we can see if it's re render or not 
+# We put this hello in useEffect in the single product component 
+# Now we  try increase count 
+# Each time it will call allllll the items 
+# Because useState preserve the value between re-render and when we it's change it's rerender 
+# Now we change the value of count where 
+# when we click button inside the bigList component
+# This gonna trigger bigList component which gonna trigger the single Product component everyTime we click 
+# TO fix this we make React.memo and wrap the bigList with it and that's it 
+# Memo function will check if the props of the component changed it will re render other way it will not 
+
+
+# React useCallBack
+
+# Do similar work as memo but this time for function
+# Let's assume we have cart counting(We adding items to the cart)
+# We just will make the functionality 
+# Now we need to make useState cart , setCart 
+# We will give initial value of zero
+# We will make the function of AddItemTo the cart 
+# In this function we will just increase cart value by 1 
+# Now we prop drill this function 
+# Pass it to the BigList 
+# Invoke it in Code of big List 
+# Pass it in single product 
+# Invoke it in Single product code 
+# Now we use it with onClick and small btn to make things go 
+# And we try it 
+# Now after we make prop drilling correctly 
+# It's ok to re render all item once we add item to cart that's totally normal 
+# Because we change the value of props 
+# But what is abnormal is the when we click on counter  The component Rerender !!!! 
+# And that's because we recreate the function of (addToCart) everySingle time 
+# To prevent that from happen we use useCallBack 
+# It work in similar way like memo but for function 
+# It's prevent the component from re render unless we change the value of function props 
+# And only at that time we will re render 
+# That's mean if we click on counter nothing will be re rerender
+# So we wrap our (AddTocart) function with useCallBack 
+# And after that we add dependency of item 
+# In this time we need (cart)
+# So everyTime the value will change we will get cart again as dependency and work on new value to create the function again 
+# This will be something to counter that depend on past value to get future value 
+# And if we pass initial array only [] 
+# This will make cart will not get more than 1 
+# Because there is no past value it will depend on it to go to the future  
+
+# UseMemo hook 
+
+# Let's imagine we have to calculate most expesinve item of our products 
+# We use reduce and we pass product we compare the single product with total product and if that's bigger than it's product we gonna return that single product and divide it by 100 because we want it in dollar (Api things) and ofc we make second value in reduce function is ,0 which mean return number or something like that i don't remember very well
+# Now each time we make any Change in the component The function will be recalled which make it pain in ass if the the function take alot of time to manifist 
+# So we need something that recalculate only and only when we change the value of api or data 
+# So use memo come in handy  
+#syntax  : useMemo(()=> function())  and that's it 
+# Now we pass this function and let's gooo 
+# And it will re render only when we change the data 
+# Note: Its very important To pass the dependency list or the functionality that we longed for and the optimization that we used useMemo for will go waste
+
+
+# Now we want to  remove the warning from fetching data we have warning that we told us that we need to do something about the getPrdouct function in dependency we should add it 
+# But if we add it we will get infinite loop 
+# And we prevent that by using callBack function 
+# This callBack function gonna provide us with 2 main thing 
+# First we prevent from rendering everytime 
+# Second we will provide the dependency array which will be the (url)
+# Only when url change we will recreate the function
+# And at that time only we gonna refresh the useEffect (trigger rerender)
+# And that's will depend on (url,and function itself)
+
+
+# Toggle (readMore showLess)
+# This kind of functionality mainly depend on true False state 
+# If true show something false show another 
+# And depend on that principle we will work 
+# First of all we make use State  showMoreInfo setShowMoreInfo 
+# Now after that we go to paragraph  
+# We use tenary operator to work with 
+# If ShowMoreInfo is true we will show full info if false we show portion of it  (we depend on amount of character )
+# Now we use subString method with template string 
+# we choose the start and the end of character  
+# And now we have full functionality 
+# Now we need to add button to flip 
+# We add button to paragraph 
+# And we add onClick event 
+# The functionality we just flip the value we get true = false  false =true 
+# And inside the button we use other tenary operator if true we write show less false read more 
+
+# How to make refresh and conditional rendering 
+# Just make else if or someKind of statement 
+#  After that make your JSX syntax 
+# Lastly for the button click pass the fetching performance and that's it 
+# Note: We should invoke it in the case that we need to pass aurgumment (URL )
+
+# How to get icons 
+# First we import library React icon 
+# Each icon will act as independent component  so we should know that 
+# first of all we should go and install our library after that we should work with it 
+# Now we go to import our component(Icon from certain library) and work with it 
+# We can style the icon using either (svg style) or class (css style) I prefer second option
+
+
+# How to make review go left and right in  array of object 
+# Simple we need index that (increase decrease )
+# When we hit (end of array  which is (array value + 1) which mean length) we go back to first item (index === array.length)
+# When we hit the start of array we go back to the end of the array (index< 0)
+
+# Menu project 
+# To make menu show all item  
+# We need condition inside the filter function
+# We gonna make if category === "all"
+# setMenu(data) 
+# return;
+# So we got our data in place
+# Note: We used that return so we go out from function without displaying anything after it 
+
+
+#Smooth Slider idea 
+
+# The main idea depend on Css where we have the position (translateX) will change 
+# For the activeSlider it will be in center 
+# For the last Slider will be in the left -100% 
+# For the all other slide will go have same position +100%
+# The idea we gonna jump from slide to other but Idon't understand how jump will work 
+# The keyStone to make this appealing is by make Them overFlow:Hidden and opacity:0 for all slider 
+# Note: The active one will have opacity of 1
+
+
+# Class alogrithim setup 
+
+# First of all after the loop we make our condition so (the person index change)
+# We add class of nextSlide to all items 
+# We add class of active class to the  item the match the index we have in our useState
+# We add class of previous slide to the last item and we do that with 2 condition which is : 
+# personIndex === index-1 || (index===0 && personIndex === people.length-1)
+# Note: We make position varible and we change over it so we can manipulate the classes in the items
+
+
+# nextBtn prevBtn functionality
+
+# Small gotcha i want to mention 
+# That we should aim for people.length-1 when we work because array is zero index
+
+# My shitty algorthim didn't work on large scale 
+# So we need to change it 
+# We gonna use (useEffect) that depend on (index,people) when change it's trigger 
+# Now we know  that we gonna make the functionality when it's bigger return to start of array 
+# Smaller index <0      go to end of array 
+
+
+# To make project more fun we gonna make timeInterval (AutoPlay)
+# To do that we need use timeInterval function which gonna have callBackFunction  and time we set 
+# Now we know how to work with time interval  we need to know something
+# First of all need to someKind of trigger so we Gonna put it in UseEffect function 
+# Second what the trigger (Change of index )
+# Third and most Important we need something that clean the function after it used 
+# So it's discard anything that isn't the last interval  
+# Only last interval gonna be counted all other gonna be discarded 
+# To do that we need clearInterval 
+# This function clear all interval and only keep last one 
+# now we know that we make our interval cleared and that's it 
+
+
+# Function approach : 
+# We can discard the first useEffect and do it with function   
+# First of all transfter all data to diffrent file 
+# Make 2 function first of nextSlide other for prev  
+# Now we have small gotcha 
+# We can work on index straight forward we need to access the old content of the state and make new Content to it 
+# Now we make callBack function we pass the old state as parameter and use It 
+# The thing we gonna return gonna be the new State 
+# Now we need to know this all work inside setItem((oldContent)=> {}) syntax example 
+# We know all that we work on functionality same as before with some tweeks 
+# same for prevSlide 
+# Now we gonna copy one of the functionality and pass it for time interval to to make go backward of forward 
+# And everything is cool and easy peasy lemon squeazzy 
+
+# LoremIpsum
+# After we make structure of html and css we need to know something 
+# First of all we gonna use onChange to make controlled input not as we did before using querySelector etc... 
+# Now we know to handle controlled input we need to handle submit
+# And i forget to mention we need 2 state value 
+# First of index (count)
+# Second for array of item 
+# Count will mark the end of array counting 
+# We add if statment of don't make over than 8 paragraph and if you make show only 1 
+# And if everything okay show the number of paragraph you want 
+# The gotcha is gonna be using either map or filter to make this happen 
+
+
+# Color generator 
+
+# To make color generator work we need 3 main things (After reading how use and manipulate the library)
+# Color string = we need to change and take from the input
+# Error we need to set when user do something wrong ; 
+# And lastly The array That we need to loop through to show items 
+
+# We make simple structure and start work rightway 
+# Note : We need handleSubmit for preventDefault 
+# We need on change to make the value we got from the  input change rightAway to the useState we have when we write something 
+# We need to set value of the input to be (color) i don't understand really well 
+# And lastly put placeHolder just for show 
+
+# Now we read library and copy from it 
+# We use method of all and add 10 
+# Note this is the common value
+# Now we work  error 
+# To work on error (when user add wrong value) we gonna use try-catch method 
+# Now if user is good person he will use it right either way we gonna display somekind of error
+# The error we gonna display is (red Border simple and clear) 
+# We control the border with truthy of falsy value using (error) state 
+# Now if error false we gonna display nothing if error true we gonna display what we have
+# NOTE: FUcking color put it in (try) not alone inside the function 
+
+
+
+
+# GroceryBud : structure first of all we need to know that we need 5 states
+# 1: for list 
+# 2: for edit flag
+# 3: for alert flag ... should be a (object)
+# 4: for id flag 
+# 5 : for name (input changing)
+
+# Now we know these things we make structure 
+# Form and it's things
+# List and it's things 
+# For form btn we will have condition naming rendering 
+# If the edit flag is true we will name edit if it's false we will have submit 
+
+# Another functionality for alert we show alert only if the value is of show in object is true 
+# Using shortCircuit operator  alert.show && <Alert/> 
+# Another functionality for submit we just make submit and prevent default and  console log something and we are on good shape 
+# Another functionality for changing input value we just make initial value and make on change function and make change on state every time we change something in the input  
+# And that's everything i want to mention
+# Yes yes there some fishy style for css and that's all
+
+
+# AddItem + condition rednering 
+
+# Before we start on those thing we mainly need to set 3 main condition 
+# If the input is empty 
+# If the edit flag is true 
+# If the input is not empty and edit flag is not true  
+# First one we need to manipulate with alert little bit only 
+# Second one we need alot of shit to do +Alert 
+# Third is our main dish for now we need to set it properly 
+
+# If name is true which mean there is text and no edit flag 
+# We gonna create new item (object) 
+# With id and value 
+# Now we will break the previous  using spread operator + and add the new item 
+# This will make the new array 
+# We will pass this new array in the list componenet
+# We go to the component and loop through it 
+# Note: Don't forget to make JSX and Css structre and styling 
+# Now with all that being said we will go back to our main goal 
+# loop through item break item  and show them 
+# Lastly we want the conditional rendering 
+# If the length of this array is bigger than 0 we gonna show the List component and it's shit 
+# Note : We do that using short Circuit method 
+# Now with all that being worked on we gonna only clear item nice and easy by make the array empty 
+# Traa we end here for today 
+
+
+# Alert work : 
+
+# First of all we need to know that we need to make alert work each time we make some change in our groecry  
+
+# Edit-clear - add - remove item 
+# To make that possible we need new component 
+# This component will show alert message and type 
+# Ofc we need to make this alert work when one of these condition above is true 
+# Now each time we one of these condition true we need to update alert 
+# Our alert is set to be (object)
+# So it will be fucking tedious if we update it manunally everyTime
+# To do it smart and clean we need to make function that need 3 thing 
+# Show , type ,message 
+# We pass them in state and traa we don't need to make the manunally updating anymore just call function and make it do as you want 
+# Lastly we need to hide alert after certain amount of time 
+# To make it easy to use we need to put the function have somekind of default value 
+# note: Es6 shit 
+# After we make that default value is false and empty for all 
+# We pass this function to alert component 
+# Now we make useEffect 
+# This useEffect will run only when componenet come to work (Initial run only)
+# we use setTimeout to delete the values make it default and secondly we clear it because we are good people 
+# That's all for alert 
+# For now we need to know that after we delete one item or clear item and add items 
+# There some tiny bug in alert 
+# Where alert show and hide very fast 
+# To fix this problem we need to do the following  
+# First of all we need to update the alert everytime we change the database (array)
+# So we need to pass the array to the alert and pass it in depedency list 
+and that's it 
+
+# Edit item value  
+
+# Edit item is the hardest part but most beautifull too 
+
+# First of all we need to make function for editing item 
+# This function will depend heavily on Id that we will go from the item 
+# First of all we need to find the item we clicked on 
+# so we loop through the list using (find loop ) and return item that match id 
+# After that we change the input value to the title of that item  that match id 
+# We set Edit id same as this item id 
+# We make edit flag true  
+# Now this 3 things in place we gonna pass this function to the list and that to the buttons 
+# Pass the id and we are in good shape first part end 
+
+# Second part 
+# Submit part 
+# Now both edit flag and name is true (there someKind of value)
+# We need to make newArray  this array will return all item the same as before 
+# But the item that have Edit Id match with it's id gonna have something different 
+# We gonna break this object of item and we gonna change it's title to match the name of input 
+# This will provide us with 2 main thing (change item and change the right item in right place )
+# Now we gonna set input empty 
+# Make alertWork function give someKind of alert 
+# Make edit id null
+# Make the editFlag false 
+# Back to the start 
+
+
+
+
+# Now use ReactRef for dynamic navbar 
+
+# Note: For navBar we need container  because someone will change in height and the other will be the container the have current height value 
+# Now we need to know what are we going to do with the value of reference
+# First of parent itself 
+#Second of ul the have links that we gonna change 
+# Both will value of null
+# First of all we gonna get the height of the parent 
+# Using boundingClientReact() 
+# This will get us the diemention 
+# We gonna use height one 
+# We gonna assign this height as px  for the links ref 
+# Now we are in good shape 
+# First of all i need to mention that we gonna use style.height some javascript + css things 
+# Last thing we gonna put all this good stuff in useEffect that work only when we click on button (change from true to false or opposite)
+# Last thing i want to mention that we gonna make this activity when showLiNKS is true when it's false give it 0px height 
+
+# Lastly i want to mention that we MUST PUT THE HEIGT AUTO IN CSS OR THE FUNCTIONALITY WILL GO BANANA 
+# With all this being said i have nothing more to do 
+# Last thing some useRef syntax i don't know like 
+# NOTE: DON'T FORGET TO ADD FUCKING REF TO THE ITEM YOU ARE USING TO REFRENCE TO IT IN THEIR JSX OR NOTHING WILL WORKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
+
+
+# let's start talk about app Context : 
+# First of all useContext to work need 2 things 
+# First we create varible and make create.appContext()
+#This will provide me with 2 thing (provider,consumer)
+# We always use provider the consumer is old thing with the arrive of useContext 
+# Now we are done with this we need to know what things we need to wrap with use Context 
+# The thing we want to wrap now is our whole app 
+# so we make AppProvider  componenet we invoke the Children {children} we use and make {AppContext.provider}  and that's how we start work 
+# Now we export it and go to index.js and import it and Wrap the whole application with it 
+# Now we add value to the provider and that's it 
+# Now we need to create costumHook  
+# So we avoid pass useContext and appContext (which hold the value) everyTime 
+# Now we create costumHook with name of useGlobal and pass what we need it it 
+# Note: First of all (AppProvider and AppContext) should start with CapitalLetter(IT MUST)
+# second we need to invoke children because it come as array 
+# We need to export correctly 
+# And that's it
+#
+
+
+# SubMenu location 
+# You need to understand that we make comoponent that change location depend on what we are hovering over 
+# You need to get on the center of that location and show your subMenu 
+#After that we need to show the data from that menu 
+# Now we know that how we can programm it ? 
+
+# First of all we need to make sure that we get the right value 
+# So we check our event Target is working on those button 
+# If it's work let's contiune 
+# Second we need to grab 2 thing 
+# TextContent which match our data titles page 
+# The (center coordinate , bottom coordinate)
+# To get the coordinate we run the function of getBoudingClientRect() 
+# We get left and right and divide them by 2 to get the center 
+# Get the bottom 
+# Now we pass those values in openSubMenu function 
+# We go to The context page and we add another UseState of location 
+# This will be object because we passed the coordinate as object 
+# Each time the location will change we will do something 
+# Now we pass the in open submenu the location setLocation 
+# Now we pass the location in global Context 
+# After that we go to start work on submenu page 
+# First of all we need to get the subMenu thing that we will change it's coordinate everyTime  
+# We do that by use  (useRef)
+# After that we gonna set a useEffect this useEffect gonna run everytime We change the location (hover)
+# Now what we to do 
+# We want to get subMenu  from the useRef 
+# We want to assign it's center to the center of bottom each time we change location 
+# same for bottom half we need to assign it to get the value of bottom but for some Reason he do it to make in the top 
+
+# Now we have all this been set we need to cover some Issue 
+# First of all we need to make function of displaySubMenu which gonna everyTime we hover overButton and gonna make these changes  
+# We need to for this function eventTarget 
+# We need to pass the location , page name through the openSubMenu because everytime display menu run gonna open the subMenu
+
+
+
+# SUBMenu data looking 
+# Now we need display a proper data in the subMenu 
+# We know that every Links item have page  (title)
+# And we already have this title  
+# What we need to do ? 
+# We gonna run through all our data using (find) and check if the (title ) we have match page.title 
+# If that's the case return that piece of data 
+# Now we have that piece of data 
+# We gonna set it in useState so we can use it in our Project 
+# Transfer it from context to the submenu
+# Take it in subMenu 
+# We destructure our object into the page and links 
+# Note: We need to set initial value of object when we make useState so We don't get error if we don't have anything in the array it will not display undefined 
+# okay make some structre loop through data display it and that's it 
+# Now we need to do some upgrade 
+# We gonna set useState in menu that have col-2 by default 
+# If the length of our array pass ===3 we gonna use col-3
+# pass 3 gonna use  col-4
+# By default it's col-2
+# Now with this all being set let's talk about how we close the subMenu 
+# We need to do 2 things 
+# 1- if we go to hero close it 
+# 2- if we go someWhere outside the link itself to navBar close it 
+# To that we need to check if the class is same as we have or not 
+# Using e.target.classList.contains(links) for example 
+# If it not match this class close it and that's it 
+
+# UseReducer : 
+# Our project depend heavily on the idea of using use Reducer 
+# Fast recap about use Reducer : 
+# It's hook that get 2 thing state , dispatch 
+# We should reducer function and initial value 
+# Initial value most of time will be object 
+# Reducer function will got 2 thing (state,action)
+# state is current sate we are in before the change action what we gonna change 
+# We gonna use context to pass this initial state since it's  object we spread it  
+# And since we spread it mean we destroy the object and now we are having varibles we can use it anywhere inside our app 
+# That's the main idea of this setup 
+
+
+# Pass functionality : 
+# First of all we need to make function of each functionality 
+# We make disptach in that function and we give name to the dispatch like "CLEAR_ITEM"
+# Now we go to reducer and compare action.type with "clear_item" if it match we gonna connect state in reducer and take out the array clear it  of cart
+# NOTE: DISPATCH syntax ({TYPE:"ASDASDAS"})
+
+
+# Increase functionality 
+
+# We need 2 thing id and type 
+# We go and connect it in it's item 
+# We go back to reducer and set up the functionality 
+# We return the state back and we gonna change over the cart (items)
+# We gonna loop through it 
+# We gonna check if the id we have match the id in the items 
+# If it's match return that item as same as before and the count will be the past count  plus 1 ; 
+# And other items don't match return it as it is 
+
+# Same in decrease 
+# Just we add a little bit of tweek because we know that when we reach 0 we should take out the item 
+# The way to do it is by plugging filter function after map function and if item don't amount reach 0 delete item from the cart 
+
+
+# CART amount and price functionality 
+
+# After we have set Everything we need to set the (amount , total )
+# First of all we need to know that we need to run the function everyTime we make small change in cart 
+# TO do that we gonna use (useEffect)
+# Simply we gonna run dispatch everyTime we change the (cart specifically)
+# Now we go to reduce and start our functionality 
+# First of all let's see what we want to do 
+# We want to return state as it is but we want to change  (amount,total)
+# SO simply we return {...state,total,amount}
+# That mean all our work will be gonna on total and amount 
+# Now we need to work on those 
+# We gonna make function that return object this object match that total and amount we will got 
+# We gonna use reduce 
+# so {total,amount} = state.cart.reduce(()=> {},{total:0,amount:0}) and here we gonna write the functionality 
+# Now we gonna set reduce (reduce have totalItem which are value gonna be returnned) and item of each iteration 
+# Now we got that we know what do now 
+# We gonna destructure the item 
+# We gonna set each time the amount of cart += amount in each iteration
+# We gonna set tempPrice which is = amount*price
+# We gonna set total += tempPrice 
+# We gonna return the totalItem ; 
+# Now we got everything right 
+# Last thing we need to want is to parsefloat the total 
+# Sometime we got weird value alot of .0000 after the zero 
+# SO we limit it to 2 only 
+# To do that we gonna make  total= parseFloat(total.toFixed(2));
+# And that's it
+
+# We fetch data initally  only using useEffect
+# we make 2 dipatch in fetchData function 
+# First when we start fuctnion we gonna pass loading 
+# Second we work on function 
+# After that we pass the dispatch FETCH and result of FETCH in payLoad 
+# We go to reducer 
+# Make loading true if we got loading
+# Make loading false if we got FETCH and we change value of cart to be payload 
+
+
+
+
+
+
+=====
+Netlify funtions
+=====
+
+1- First we make directory named functions 
+2- Second in main root we make file named netlify.tom 
+3- we make [build] inside it 
+4- we make name of functions and give it's roots 
+5- now we go to directory and work on our functions 
+6- make new file named hello.js (for test)
+7- now the coding will be nodejs style 
+8- we make function and make it async one and export it right away 
+9- and now we set the function in node js and check it it's work or not 
+10- to check the function we should write it's roots 
+11 domain/.netlify/functions/hello  .. and this will work 
+12- if not try to restart server and check again  
+
+
+======
+stripeCheckout component
+=====
+1- We make stripe comoponent 
+2- We wrap it 
+3- we use this function as middleman between server - user  
+4- Get information from user and pass it to server 
+5- Get info from server and make transaction clear and complete it for user 
+6- If the card is empty we will present in checkout (your card is empty) 
+7- and we add button fill it 
+8- If not empty we will show the strip checkout page 
+
+
+
+======================
+STRIPE ENV AND IMPORTS 
+======================
+1- We need now to make enviroment varibles inside env file so we are safe and no one can see our keys or domains. 
+2- After doing that we gonna import things from stripes-js and strips React and start work with it 
+3- We gonna import usercontext and cartContext and work with it 
+4 - We gonna import use history and work with it 
+5- we gonna add to our local stripe our public_key stripe 
+6- and we name it promise 
+7- we Gonna wrap our checkout form in Element strip 
+8- we gonna pass in the elemnts the promise we made 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
